@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="login-container">
+    <form class="login-form" action="/listar" method="post">
+        <div class="login-avatar">
+            <i class="fa-solid fa-user"></i>
+        </div>
+        <label for="nombreUsuario">Usuario</label>
+        <div class="input-icon">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Usuario" required>
+        </div>
+        <label for="contraseña">Contraseña</label>
+        <div class="input-icon">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+        </div>
+        <button type="submit" class="btn-login">Ingresar</button>
+        <div class="mensaje-error">
+            <span th:text="${error}"></span>
+        </div>
+    </form>
+</div>
+</body>
+</html>

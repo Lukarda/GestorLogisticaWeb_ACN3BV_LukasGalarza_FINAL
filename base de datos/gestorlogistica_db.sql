@@ -1,0 +1,62 @@
+-- Crear base de datos
+CREATE DATABASE IF NOT EXISTS gestorlogistica_db;
+USE gestorlogistica_db;
+
+-- Tabla de usuarios
+CREATE TABLE IF NOT EXISTS usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_usuario VARCHAR(50) UNIQUE NOT NULL,
+    contraseña VARCHAR(100) NOT NULL,
+    rol ENUM('admin', 'logistico') NOT NULL,
+    estado BOOLEAN DEFAULT TRUE
+);
+
+-- Usuarios con contraseñas encriptadas (BCrypt)
+INSERT INTO usuario (nombre_usuario, contraseña, rol) VALUES
+('admin', '$2a$12$r17urZiJPyTFKGzC6I6x6umEhD7UfdVsNYAz5L1Ix0MN82AOKBlNq', 'admin'),
+('logistica_maria', '$2a$12$r17urZiJPyTFKGzC6I6x6umEhD7UfdVsNYAz5L1Ix0MN82AOKBlNq', 'logistico'),
+('operador_juan', '$2a$12$r17urZiJPyTFKGzC6I6x6umEhD7UfdVsNYAz5L1Ix0MN82AOKBlNq', 'logistico');
+
+-- Tabla de productos
+CREATE TABLE IF NOT EXISTS producto (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    stock INT NOT NULL DEFAULT 0,
+    tipo VARCHAR(50) NOT NULL
+);
+
+INSERT INTO producto (nombre, descripcion, stock, tipo) VALUES
+('The Legend of Zelda: Ocarina of Time', 'Clásico juego de aventuras para Nintendo 64.', 15, 'Videojuego'),
+('Super Mario Bros. 3', 'Juego retro de plataformas para NES.', 12, 'Videojuego'),
+('Batman: Año Uno', 'Cómic que narra el inicio del caballero oscuro.', 8, 'Cómic'),
+('Cien Años de Soledad', 'Novela de Gabriel García Márquez.', 10, 'Libro'),
+('Pokémon Rojo Fuego', 'Versión GBA coleccionable.', 5, 'Videojuego');
+
+-- Tabla de movimientos de stock
+CREATE TABLE IF NOT EXISTS movimiento_stock (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    producto_id BIGINT NOT NULL,
+    usuario_id INT NOT NULL,
+    tipo_movimiento ENUM('ingreso','egreso') NOT NULL,
+    cantidad INT NOT NULL,
+    fecha_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (producto_id) REFERENCES producto(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
+-- Tabla de incidencias
+CREATE TABLE IF NOT EXISTS incidencia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    producto_id BIGINT NOT NULL,
+    usuario_id INT NOT NULL,
+    descripcion TEXT NOT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    estado ENUM('abierta', 'cerrada') DEFAULT 'abierta',
+    FOREIGN KEY (producto_id) REFERENCES producto(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
+-- Ejemplo de incidencia
+INSERT INTO incidencia (producto_id, usuario_id, descripcion) VALUES
+(1, 2, 'Stock bajo: quedan 2 unidades de The Legend of Zelda');

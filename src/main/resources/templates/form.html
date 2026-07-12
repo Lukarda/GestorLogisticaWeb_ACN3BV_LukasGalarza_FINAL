@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Formulario de Producto</title>
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<div class="main-content">
+  <img src="/img/admin.jpg" class="perfil-img" alt="Perfil"/>
+  <div class="titulo-usuarios" th:text="${producto.id == null} ? 'Nuevo Producto' : 'Editar Producto'"></div>
+  <div class="tabla-usuarios">
+    <div th:if="${usuarioLogueado.rol == 'admin'}">
+      <form class="form-usuario"
+            th:if="${producto.id == null}"
+            th:action="@{/productos}"
+            th:object="${producto}"
+            method="post">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required minlength="3" maxlength="100" placeholder="Nombre"/>
+        <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="mensaje-error"></div>
+
+        <label>Descripción:</label>
+        <textarea th:field="*{descripcion}" maxlength="1000" placeholder="Descripción"></textarea>
+        <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="mensaje-error"></div>
+
+        <label>Stock:</label>
+        <input type="number" th:field="*{stock}" required min="0" placeholder="Stock"/>
+        <div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="mensaje-error"></div>
+
+        <label>Tipo:</label>
+        <select th:field="*{tipo}" required>
+          <option value="" disabled selected>Selecciona un tipo</option>
+          <option value="Videojuego">Videojuego</option>
+          <option value="Cómic">Cómic</option>
+          <option value="Libro">Libro</option>
+        </select>
+        <div th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="mensaje-error"></div>
+
+        <button type="submit" class="btn-agregar">Guardar</button>
+      </form>
+      <form class="form-usuario"
+            th:unless="${producto.id == null}"
+            th:action="@{/productos/editar/{id}(id=${producto.id})}"
+            th:object="${producto}"
+            method="post">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required minlength="3" maxlength="100" placeholder="Nombre"/>
+        <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="mensaje-error"></div>
+
+        <label>Descripción:</label>
+        <textarea th:field="*{descripcion}" maxlength="1000" placeholder="Descripción"></textarea>
+        <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="mensaje-error"></div>
+
+        <label>Stock:</label>
+        <input type="number" th:field="*{stock}" required min="0" placeholder="Stock"/>
+        <div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="mensaje-error"></div>
+
+        <label>Tipo:</label>
+        <select th:field="*{tipo}" required>
+          <option value="Videojuego" th:selected="${producto.tipo == 'Videojuego'}">Videojuego</option>
+          <option value="Cómic" th:selected="${producto.tipo == 'Cómic'}">Cómic</option>
+          <option value="Libro" th:selected="${producto.tipo == 'Libro'}">Libro</option>
+        </select>
+        <div th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="mensaje-error"></div>
+
+        <button type="submit" class="btn-agregar">Guardar</button>
+      </form>
+    </div>
+    <a th:href="@{/productos}">Volver a la lista</a>
+  </div>
+</div>
+</body>
+</html>

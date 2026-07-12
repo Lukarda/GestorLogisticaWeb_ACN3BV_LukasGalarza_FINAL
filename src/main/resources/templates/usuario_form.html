@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar Usuario Logístico</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<div class="main-content">
+    <img src="/img/admin.jpg" class="perfil-img" alt="Perfil"/>
+    <div class="titulo-usuarios">Nuevo Usuario Logístico</div>
+    <div class="tabla-usuarios">
+        <form class="form-usuario" th:action="@{/usuarios}" th:object="${usuario}" method="post">
+            <label>Nombre de usuario:</label>
+            <input type="text" th:field="*{nombreUsuario}" required maxlength="50" />
+            <label>Contraseña:</label>
+            <input type="password" th:field="*{contraseña}" required maxlength="100" />
+            <input type="hidden" th:field="*{rol}" value="logistico" />
+            <button type="submit" class="btn-agregar">Guardar</button>
+        </form>
+        <a th:href="@{/usuarios}" class="btn-agregar">Volver a la lista</a>
+    </div>
+</div>
+</body>
+</html>

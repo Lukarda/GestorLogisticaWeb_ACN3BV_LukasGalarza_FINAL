@@ -1,0 +1,15 @@
+<div class="sidebar" th:fragment="sidebar">
+    <img src="img/admin.jpg" class="perfil-img" alt="Perfil"/>
+    <div class="perfil-nombre">
+        <i th:if="${usuarioLogueado != null and usuarioLogueado.rol == 'admin'}" class="fa-solid fa-crown"></i>
+        <i th:if="${usuarioLogueado == null or usuarioLogueado.rol != 'admin'}" class="fa-solid fa-user"></i>
+        <span th:text="${usuarioLogueado != null ? usuarioLogueado.nombreUsuario : 'Admin'}">Admin</span>
+    </div>
+    <nav>
+        <a th:href="@{/productos}">Productos</a>
+        <a th:if="${usuarioLogueado != null and usuarioLogueado.rol == 'admin'}" th:href="@{/usuarios}">Usuarios</a>
+        <a th:href="@{/incidencias}">Incidencias</a>
+        <a th:href="@{/movimientos}">Movimientos de stock</a>
+    </nav>
+    <a th:href="@{/logout}" class="cerrar-sesion">Cerrar sesión</a>
+</div>

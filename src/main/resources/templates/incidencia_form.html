@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reportar Incidencia</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<div class="main-content">
+    <img src="/img/admin.jpg" class="perfil-img" alt="Perfil"/>
+    <h1 style="font-size:2.5em; font-weight:bold; text-align:center;">
+        Reportar incidencia para <span th:text="${producto.nombre}"></span>
+    </h1>
+    <form th:action="@{/incidencias/nuevo/{id}(id=${producto.id})}" th:object="${incidencia}" method="post">
+        <div class="form-row">
+            <label>Descripción:</label>
+            <textarea th:field="*{descripcion}" required style="width:250px;"></textarea>
+            <label>Gravedad:</label>
+            <select th:field="*{gravedad}">
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+            </select>
+            <button type="submit" class="btn-agregar">Enviar</button>
+        </div>
+        <div th:if="${usuarioLogueado != null and usuarioLogueado.rol == 'admin'}" style="text-align:center;">
+            <label>Estado:</label>
+            <select th:field="*{estado}">
+                <option value="Pendiente">Pendiente</option>
+                <option value="En Revisión">En Revisión</option>
+                <option value="Resuelta">Resuelta</option>
+            </select>
+        </div>
+    </form>
+    <div style="text-align:center;">
+        <a th:href="@{/productos}">Volver</a>
+    </div>
+</div>
+</body>
+</html>

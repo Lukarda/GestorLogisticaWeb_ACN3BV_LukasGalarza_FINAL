@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Lista de Productos</title>
+</head>
+<body class="usuarios-bg">
+<div th:replace="~{sidebar :: sidebar}"></div>
+<div class="main-content">
+    <img src="/img/admin.jpg" class="perfil-img" alt="Perfil"/>
+    <h1>Lista de Productos</h1>
+    <div class="tabla-usuarios">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Stock</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producto : ${productos}">
+                <td th:text="${producto.id}"></td>
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.descripcion}"></td>
+                <td th:text="${producto.stock}"></td>
+                <td th:text="${producto.tipo}"></td>
+                <td>
+                    <span th:if="${usuarioLogueado.rol == 'admin'}">
+                        <a class="btn-modificar" th:href="@{/productos/editar/{id}(id=${producto.id})}">Editar</a>
+                        <a class="btn-eliminar" th:href="@{/productos/eliminar/{id}(id=${producto.id})}">Eliminar</a>
+                    </span>
+                    <span th:if="${usuarioLogueado.rol == 'logistico'}">
+                        <a class="btn-agregar" th:href="@{/incidencias/nuevo/{id}(id=${producto.id})}">Reportar incidencia</a>
+                    </span>
+                    <span th:if="${usuarioLogueado != null and usuarioLogueado.rol == 'logistico'}">
+                        <a class="btn-agregar" th:href="@{/movimientos/nuevo}">Registrar movimiento de stock</a>
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${usuarioLogueado.rol == 'admin'}" style="margin-top: 24px;">
+        <a class="btn-agregar" th:href="@{/productos/nuevo}">Agregar producto</a>
+    </div>
+</div>
+</body>
+</html>

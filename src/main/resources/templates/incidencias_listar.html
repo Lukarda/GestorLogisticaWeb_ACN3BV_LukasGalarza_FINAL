@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Incidencias Reportadas</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<div class="main-content">
+  <img src="/img/admin.jpg" class="perfil-img" alt="Perfil"/>
+  <h1 class="titulo-incidencias">Incidencias Reportadas</h1>
+  <div class="incidencias-grid">
+    <div class="incidencia-card" th:each="incidencia : ${incidencias}">
+      <div>
+        <span class="tipo" th:text="'Tipo: ' + ${incidencia.producto.tipo}"></span>
+      </div>
+      <div>
+        <span class="descripcion" th:text="${incidencia.descripcion}"></span>
+      </div>
+      <div>
+        <span class="gravedad"
+              th:text="'Gravedad: ' + ${incidencia.gravedad}"
+              th:classappend="' gravedad-' + ${#strings.defaultString(incidencia.gravedad, 'baja').toLowerCase()}"></span>
+      </div>
+      <div th:if="${usuarioLogueado != null and usuarioLogueado.rol == 'admin'}">
+        <span th:text="'Estado: ' + ${incidencia.estado}"></span>
+      </div>
+      <div>
+        <span class="reportado" th:text="'Reportado por: ' + ${incidencia.usuario != null ? incidencia.usuario.nombreUsuario : 'Sin usuario'}"></span>
+      </div>
+      <div>
+        <span class="producto" th:text="'Producto: ' + ${incidencia.producto != null ? incidencia.producto.nombre : 'Sin producto'}"></span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

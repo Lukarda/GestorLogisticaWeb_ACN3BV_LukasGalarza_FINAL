@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Registrar Movimiento</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<div class="main-content">
+  <img src="/img/admin.jpg" class="perfil-img" alt="Perfil"/>
+  <h1 style="font-size:2.5em; font-weight:bold; text-align:center;">
+    Registrar Movimiento de Stock
+  </h1>
+  <form th:action="@{/movimientos/nuevo}" th:object="${movimiento}" method="post">
+    <div class="form-row">
+      <label>Producto:</label>
+      <select th:field="*{producto.id}">
+        <option th:each="prod : ${productos}" th:value="${prod.id}" th:text="${prod.nombre}"></option>
+      </select>
+      <label>Tipo de Movimiento:</label>
+      <select th:field="*{tipoMovimiento}">
+        <option value="ingreso">Ingreso</option>
+        <option value="egreso">Egreso</option>
+      </select>
+      <label>Cantidad:</label>
+      <input type="number" th:field="*{cantidad}" min="1" required style="width:200px;" />
+      <button type="submit" class="btn-agregar">Registrar</button>
+    </div>
+  </form>
+  <div style="text-align:center;">
+    <a th:href="@{/movimientos}" class="btn-agregar">Volver</a>
+  </div>
+</div>
+</body>
+</html>

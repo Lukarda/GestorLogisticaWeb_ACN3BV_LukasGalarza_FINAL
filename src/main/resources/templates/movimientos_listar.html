@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movimientos de Stock</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<div class="main-content">
+    <img src="/img/admin.jpg" class="perfil-img" alt="Perfil"/>
+    <h1 class="titulo-incidencias">Movimientos de Stock</h1>
+    <div style="text-align:center; margin-bottom: 20px;" th:if="${usuarioLogueado.rol == 'logistico'}">
+        <a th:href="@{/movimientos/nuevo}" class="btn-agregar">Registrar nuevo movimiento</a>
+    </div>
+    <div class="incidencias-grid">
+        <div class="incidencia-card" th:each="mov : ${movimientos}">
+            <div>
+                <span class="tipo" th:text="'Producto: ' + ${mov.producto.nombre}"></span>
+            </div>
+            <div>
+                <span th:text="'Tipo: ' + (${mov.tipoMovimiento == 'ingreso' ? 'Ingreso' : 'Egreso'})"></span>
+            </div>
+            <div>
+                <span th:text="'Cantidad: ' + ${mov.cantidad}"></span>
+            </div>
+            <div>
+                <span th:text="'Fecha: ' + ${#temporals.format(mov.fechaHora, 'dd/MM/yyyy HH:mm')}"></span>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center; margin-top: 24px;">
+        <a th:href="@{/productos}" class="btn-agregar">Volver</a>
+    </div>
+</div>
+</body>
+</html>
