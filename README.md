@@ -1,14 +1,31 @@
 # GestorLogisticaWeb_ACN3BV_LukasGalarza_FINAL
 
+![Java](https://img.shields.io/badge/Java-17-007396?style=for-the-badge&logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white)
+
 Aplicación web full-stack desarrollada con **Spring Boot** para la gestión de productos, movimientos de stock y usuarios con roles diferenciados.
 
-Está pensada para comercios, depósitos, ferreterías o centros logísticos que necesitan controlar inventario, registrar ingresos y egresos, y mantener un historial de movimientos con auditoría por usuario.
+Está pensada para comercios, depósitos, ferreterías o centros logísticos que necesitan controlar inventario, registrar ingresos y egresos, y mantener un historial completo de movimientos con auditoría por usuario.
 
-## Descripción general
+## 📋 Descripción
 
-El sistema implementa una arquitectura **MVC** con persistencia en **MySQL**, vistas con **Thymeleaf** y seguridad mediante **Spring Security**. Permite administrar el stock de forma centralizada, controlar accesos por rol y mantener trazabilidad de cada operación.
+El sistema implementa una arquitectura **MVC** con persistencia en **MySQL**, vistas con **Thymeleaf** y seguridad mediante **Spring Security**.  
+Permite administrar el stock de forma centralizada, gestionar usuarios con distintos roles y registrar cada operación para garantizar trazabilidad y control.
 
-## Tecnologías utilizadas
+## ✨ Características principales
+
+- Inicio de sesión seguro con control de sesión
+- Alta, edición y baja de productos
+- Registro de movimientos de stock: ingresos y egresos
+- Historial de movimientos con usuario y fecha
+- Gestión de usuarios con roles diferenciados
+- Vistas protegidas según permisos
+- Filtros de movimientos por tipo o fecha
+- Formularios validados en frontend y backend
+
+## 🛠️ Tecnologías utilizadas
 
 - Java 17
 - Spring Boot 3.x
@@ -22,7 +39,7 @@ El sistema implementa una arquitectura **MVC** con persistencia en **MySQL**, vi
 - HTML5
 - CSS3
 
-## Estructura general del proyecto
+## 🗂️ Estructura general del proyecto
 
 - **Controllers**: `ProductoController`, `MovimientoController`, `UsuarioController`, `LoginController`
 - **Model / Entities**: `Producto`, `Movimiento`, `Usuario`, `TipoMovimiento`
@@ -32,18 +49,7 @@ El sistema implementa una arquitectura **MVC** con persistencia en **MySQL**, vi
 - **static/**: recursos públicos como CSS, imágenes y JavaScript
 - **application.properties**: configuración de conexión a base de datos y JPA
 
-## Funcionalidades principales
-
-- Inicio de sesión seguro con control de sesión
-- Alta, edición y baja de productos
-- Registro de movimientos de stock: ingresos y egresos
-- Historial de movimientos con usuario y fecha
-- Gestión de usuarios con roles diferenciados
-- Vistas protegidas según permisos
-- Filtros de movimientos por tipo o fecha
-- Formularios validados en frontend y backend
-
-## Roles del sistema
+## 👥 Roles del sistema
 
 ### ADMIN
 - Acceso total al sistema
@@ -57,7 +63,7 @@ El sistema implementa una arquitectura **MVC** con persistencia en **MySQL**, vi
 - Consulta de productos y movimientos permitidos
 - Sin acceso a zonas de administración
 
-## Validaciones implementadas
+## ✅ Validaciones implementadas
 
 - El stock no puede quedar negativo
 - Los campos numéricos se validan correctamente
@@ -66,9 +72,9 @@ El sistema implementa una arquitectura **MVC** con persistencia en **MySQL**, vi
 - Cada acción queda registrada con fecha y usuario
 - Los usuarios logísticos no acceden a funciones administrativas
 
-## Base de datos
+## 🗃️ Base de datos
 
-La aplicación trabaja con una base de datos MySQL y genera las tablas automáticamente al iniciar el proyecto.
+La aplicación trabaja con una base de datos **MySQL** y genera las tablas automáticamente al iniciar el proyecto.
 
 ### Entidades principales
 - `Producto`
@@ -80,16 +86,7 @@ La aplicación trabaja con una base de datos MySQL y genera las tablas automáti
 - Los movimientos quedan asociados al usuario que los realizó
 - Se mantiene historial de auditoría para trazabilidad de operaciones
 
-## Requisitos previos
-
-Antes de ejecutar el proyecto, asegurate de tener instalado:
-
-- Java 17
-- Maven
-- MySQL Server
-- Un IDE compatible como IntelliJ IDEA o Eclipse
-
-## Instalación y ejecución
+## 🚀 Instalación y ejecución
 
 ### 1. Clonar o descargar el proyecto
 
@@ -133,21 +130,21 @@ mvn spring-boot:run
 http://localhost:8080/login
 ```
 
-## Acceso inicial
+## 🔐 Acceso inicial
 
 - **Usuario:** `admin`
 - **Contraseña:** `admin123`
 
 Este usuario cuenta con permisos totales sobre el sistema.
 
-## Observaciones técnicas
+## 📌 Observaciones técnicas
 
 - Arquitectura modular basada en Spring Boot + MVC + JPA
 - Migrado desde una versión de escritorio en JavaFX
 - Interfaz web simple y funcional basada en Bootstrap
 - Diseñado para escalar con nuevas entidades como categorías, reportes o historial extendido
 
-## Posibles mejoras futuras
+## 🔮 Posibles mejoras futuras
 
 - Reportes y métricas de stock
 - Exportación de movimientos a Excel o PDF
@@ -156,6 +153,10 @@ Este usuario cuenta con permisos totales sobre el sistema.
 - Historial avanzado de auditoría
 - Búsqueda y paginación en listados
 
-## Autor
+## 👨‍💻 Autor
 
 Proyecto realizado por **Lukas Galarza**.
+
+---
+
+⭐ Si te gustó este proyecto, no olvides dejarle una estrella.
